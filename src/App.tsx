@@ -1,14 +1,21 @@
 import { useGetAllContactsQuery } from "./API/contactsAPI";
-import { Button } from "./components/ui/button";
+import ContactsList from "./components/ContactsList";
+import AddContactForm from "./components/AddContactForm";
+import ContactsLoader from "./components/ContactsLoader";
 
 function App() {
-  const { data, error, isLoading } = useGetAllContactsQuery("");
-  console.log(error);
-  console.log(data);
+  const { data, isLoading } = useGetAllContactsQuery();
   return (
-    <main className="w-full pt-20">
-      <h1>Contacts</h1>
-      <Button>Click!</Button>
+    <main className="w-full max-w-[1280px] min-w-[400px] mx-auto">
+      <header className="pt-10 pb-4 top-0 sticky w-full bg-white z-50">
+        <h1 className="font-semibold text-2xl text-gray-700">Contacts</h1>
+        <AddContactForm />
+      </header>
+      {isLoading ? (
+        <ContactsLoader />
+      ) : (
+        <ContactsList contacts={data?.resources} />
+      )}
     </main>
   );
 }

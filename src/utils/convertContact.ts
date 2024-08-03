@@ -1,4 +1,4 @@
-import { AddContactFormParams } from "@/models/contactType";
+import { AddContactFormParams } from "@/models/formsTypes";
 
 export const covertContact = (data: AddContactFormParams) => {
   const contact = Object.keys(data).reduce((prev, key) => {
